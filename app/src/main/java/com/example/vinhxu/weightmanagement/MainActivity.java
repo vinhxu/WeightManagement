@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +71,12 @@ public class MainActivity extends AppCompatActivity {
         listView_userNameItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String userName = userNameArray[position];
+                String userName = userNameArray[position];
+                Toast.makeText(getBaseContext(), userName, Toast.LENGTH_LONG).show();
+                //TextView currentDetails_user = (TextView) findViewById(R.id.textView_user);
+                //currentDetails_user.setText("test");
                 Intent intent = new Intent("com.example.vinhxu.weightmanagement.CurrentDetails");
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
