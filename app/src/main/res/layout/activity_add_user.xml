@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.vinhxu.weightmanagement.AddUser">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/userNameHeader"
+        android:hint="Hello"
+        android:text="User name"
+        android:layout_alignBottom="@+id/editText_userName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_userName"
+        android:contextClickable="false"
+        android:hint="vinhxu"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/startWeightHeader"
+        android:layout_toEndOf="@+id/startWeightHeader" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/startWeightHeader"
+        android:hint="Hello"
+        android:text="Start Weight (kg)"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/userNameHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText_startWeight"
+        android:hint="64"
+        android:layout_alignBottom="@+id/startWeightHeader"
+        android:layout_alignLeft="@+id/editText_userName"
+        android:layout_alignStart="@+id/editText_userName"
+        android:layout_alignRight="@+id/editText_userName"
+        android:layout_alignEnd="@+id/editText_userName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Target Weight (kg)"
+        android:id="@+id/targetWeighHeader"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText_targetWeight"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/editText_startWeight"
+        android:layout_alignStart="@+id/editText_startWeight"
+        android:layout_alignRight="@+id/editText_startWeight"
+        android:layout_alignEnd="@+id/editText_startWeight"
+        android:hint="88" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Target Days"
+        android:id="@+id/targetDaysHeader"
+        android:layout_below="@+id/editText_targetWeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_targetDays"
+        android:layout_alignBottom="@+id/targetDaysHeader"
+        android:layout_alignLeft="@+id/editText_targetWeight"
+        android:layout_alignStart="@+id/editText_targetWeight"
+        android:layout_alignRight="@+id/editText_targetWeight"
+        android:layout_alignEnd="@+id/editText_targetWeight"
+        android:hint="30" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:id="@+id/button_addUserDone"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/targetDaysHeader"
+        android:layout_toEndOf="@+id/targetDaysHeader"
+        android:layout_marginBottom="43dp" />
+</RelativeLayout>
