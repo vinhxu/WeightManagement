@@ -18,8 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static Button addUserButton;
     private static ListView listView_userNameItem;
+    //Define user related info into lists
     private static List<String> userNameList = new ArrayList<String>();
+    private static List<String> startWeightList = new ArrayList<String>();
+    private static List<String> targetWeightList = new ArrayList<String>();
+    //Convert lists into String arrays
     private static String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
+    private static String[] startWeightArray = startWeightList.toArray(new String[startWeightList.size()]);
+    private static String[] targetWeightArray = targetWeightList.toArray(new String[targetWeightList.size()]);
+
+    //Define requestCode for userName data
     private static int requestCode_returnUserName = 2;
 
     @Override
@@ -54,9 +62,20 @@ public class MainActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==requestCode_returnUserName)
         {
-            String message=data.getStringExtra("MESSAGE");
-            userNameList.add(message);
+            //Get all users data from addUser activity
+            String userName=data.getStringExtra("userName");
+            String startWeight=data.getStringExtra("startWeight");
+            String targetWeight=data.getStringExtra("targetWeight");
+
+            //Add users data to lists
+            userNameList.add(userName);
+            startWeightList.add(startWeight);
+            targetWeightList.add(targetWeight);
+
+            //Convert lists to String arrays
             userNameArray = userNameList.toArray(new String[userNameList.size()]);
+            startWeightArray = startWeightList.toArray(new String[startWeightList.size()]);
+            targetWeightArray = targetWeightList.toArray(new String[targetWeightList.size()]);
 
             ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameArray);
 
@@ -72,11 +91,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String userName = userNameArray[position];
-                Toast.makeText(getBaseContext(), userName, Toast.LENGTH_LONG).show();
-                //TextView currentDetails_user = (TextView) findViewById(R.id.textView_user);
-                //currentDetails_user.setText("test");
+                String startWeight = startWeightArray[position];
+                String targetWeight = targetWeightArray[position];
+
+                //Toast.makeText(getBaseContext(), userName, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent("com.example.vinhxu.weightmanagement.CurrentDetails");
                 intent.putExtra("userName", userName);
+                intent.putExtra("startWeight", startWeight);
+                intent.putExtra("targetWeight", targetWeight);
+
                 startActivity(intent);
             }
         });

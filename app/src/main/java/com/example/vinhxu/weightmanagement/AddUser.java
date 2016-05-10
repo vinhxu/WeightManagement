@@ -27,10 +27,20 @@ public class AddUser extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         EditText editText_userName = (EditText) findViewById(R.id.editText_userName);
-                        String message= editText_userName.getText().toString();
+                        EditText editText_startWeight = (EditText) findViewById(R.id.editText_startWeight);
+                        EditText editText_targetWeight = (EditText) findViewById(R.id.editText_targetWeight);
+
+                        String userName= editText_userName.getText().toString();
+                        String startWeight= editText_startWeight.getText().toString();
+                        String targetWeight= editText_targetWeight.getText().toString();
+
                         Intent intent=new Intent();
-                        intent.putExtra("MESSAGE",message);
+                        intent.putExtra("userName",userName);
+                        intent.putExtra("startWeight",startWeight);
+                        intent.putExtra("targetWeight",targetWeight);
+
                         setResult(requestCode_returnUserName,intent);
+
                         finish();
                     }
                 }
