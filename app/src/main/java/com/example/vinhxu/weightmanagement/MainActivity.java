@@ -14,7 +14,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static Button addUserButton;
-
+    private static List<String> userNameList = new ArrayList<String>();
+    private static String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
 
 
     @Override
@@ -22,21 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onClick_addUserButton();
-        //String[] userNameArray = {"vinhxu","lnk","Danh","Khanh"};
-        List<String> userNameList = new ArrayList<String>();
 
-        userNameList.add("vinhxu");
-        userNameList.add("anybody");
-        userNameList.add("Danh");
-
-        String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
-
-
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameArray);
-
-        ListView listView = (ListView) findViewById(R.id.listView_userName);
-        listView.setAdapter(adapter);
     }
 
     public void onClick_addUserButton() {
@@ -46,10 +33,32 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent("com.example.vinhxu.weightmanagement.AddUser");
-                        startActivity(intent);
+                        startActivityForResult(intent, 2);// Activity is started with requestCode 2
+                        //startActivity(intent);
 
                     }
                 }
         );
     }
+
+    // Call Back method  to get the Message form other Activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {
+            String message=data.getStringExtra("MESSAGE");
+            userNameList.add(message);
+            userNameArray = userNameList.toArray(new String[userNameList.size()]);
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameArray);
+
+            ListView listView = (ListView) findViewById(R.id.listView_userName);
+            listView.setAdapter(adapter);
+        }
+    }
+
+
 }
