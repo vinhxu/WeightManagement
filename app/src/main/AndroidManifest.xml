@@ -11,7 +11,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -19,9 +18,16 @@
         <activity android:name=".AddUser">
             <intent-filter>
                 <action android:name="com.example.vinhxu.weightmanagement.AddUser" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".CurrentDetails">
+            <intent-filter>
+                <action android:name="com.example.vinhxu.weightmanagement.CurrentDetails" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
     </application>
 

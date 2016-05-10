@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class AddUser extends AppCompatActivity {
 
     private static Button button_addUserDone;
+    private static int requestCode_returnUserName = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class AddUser extends AppCompatActivity {
                         String message= editText_userName.getText().toString();
                         Intent intent=new Intent();
                         intent.putExtra("MESSAGE",message);
-                        setResult(2,intent);
+                        setResult(requestCode_returnUserName,intent);
                         finish();
                     }
                 }

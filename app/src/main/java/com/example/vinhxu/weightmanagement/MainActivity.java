@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private static Button addUserButton;
     private static List<String> userNameList = new ArrayList<String>();
     private static String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
-
+    private static int requestCode_returnUserName = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent("com.example.vinhxu.weightmanagement.AddUser");
-                        startActivityForResult(intent, 2);// Activity is started with requestCode 2
+                        startActivityForResult(intent, requestCode_returnUserName);// Activity is started with requestCode 2
                         //startActivity(intent);
 
                     }
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2)
+        if(requestCode==requestCode_returnUserName)
         {
             String message=data.getStringExtra("MESSAGE");
             userNameList.add(message);
