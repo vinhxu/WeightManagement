@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static Button addUserButton;
+    private static ListView listView_userNameItem;
     private static List<String> userNameList = new ArrayList<String>();
     private static String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
     private static int requestCode_returnUserName = 2;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onClick_addUserButton();
+        onClick_listView();
 
     }
 
@@ -59,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
         }
     }
+
+
+    public void onClick_listView() {
+        listView_userNameItem = (ListView)findViewById(R.id.listView_userName);
+        listView_userNameItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //String userName = userNameArray[position];
+                Intent intent = new Intent("com.example.vinhxu.weightmanagement.CurrentDetails");
+                startActivity(intent);
+            }
+        });
+    }
+
 
 
 }
