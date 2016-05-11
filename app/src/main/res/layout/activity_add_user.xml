@@ -47,11 +47,10 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/editText_startWeight"
-        android:hint="64"
+        android:hint="38"
         android:layout_alignBottom="@+id/startWeightHeader"
         android:layout_alignStart="@+id/editText_userName"
-        android:layout_alignEnd="@+id/editText_userName"
-        android:text="38" />
+        android:layout_alignEnd="@+id/editText_userName" />
 
     <TextView
         android:layout_width="wrap_content"

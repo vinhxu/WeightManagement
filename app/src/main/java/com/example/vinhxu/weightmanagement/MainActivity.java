@@ -18,14 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static Button addUserButton;
     private static ListView listView_userNameItem;
-    //Define user related info into lists
+    //Create userProfile lists
     private static List<String> userNameList = new ArrayList<String>();
     private static List<String> startWeightList = new ArrayList<String>();
     private static List<String> targetWeightList = new ArrayList<String>();
+    /*
     //Convert lists into String arrays
     private static String[] userNameArray = userNameList.toArray(new String[userNameList.size()]);
     private static String[] startWeightArray = startWeightList.toArray(new String[startWeightList.size()]);
     private static String[] targetWeightArray = targetWeightList.toArray(new String[targetWeightList.size()]);
+    */
 
     //Define requestCode for userName data
     private static int requestCode_returnUserName = 2;
@@ -72,12 +74,14 @@ public class MainActivity extends AppCompatActivity {
             startWeightList.add(startWeight);
             targetWeightList.add(targetWeight);
 
+            /*
             //Convert lists to String arrays
             userNameArray = userNameList.toArray(new String[userNameList.size()]);
             startWeightArray = startWeightList.toArray(new String[startWeightList.size()]);
             targetWeightArray = targetWeightList.toArray(new String[targetWeightList.size()]);
+            */
 
-            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameArray);
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameList);
 
             ListView listView = (ListView) findViewById(R.id.listView_userName);
             listView.setAdapter(adapter);
@@ -90,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         listView_userNameItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String userName = userNameArray[position];
-                String startWeight = startWeightArray[position];
-                String targetWeight = targetWeightArray[position];
+                String userName = userNameList.get(position);
+                String startWeight = startWeightList.get(position);
+                String targetWeight = targetWeightList.get(position);
 
                 //Toast.makeText(getBaseContext(), userName, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent("com.example.vinhxu.weightmanagement.CurrentDetails");
