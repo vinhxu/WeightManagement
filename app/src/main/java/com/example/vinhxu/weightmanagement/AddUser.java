@@ -1,12 +1,12 @@
 package com.example.vinhxu.weightmanagement;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class AddUser extends AppCompatActivity {
 
@@ -20,12 +20,15 @@ public class AddUser extends AppCompatActivity {
         onClick_addUserButtonDone();
     }
 
+
+
     public void onClick_addUserButtonDone() {
         button_addUserDone = (Button) findViewById(R.id.button_addUserDone);
         button_addUserDone.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         EditText editText_userName = (EditText) findViewById(R.id.editText_userName);
                         EditText editText_startWeight = (EditText) findViewById(R.id.editText_startWeight);
                         EditText editText_targetWeight = (EditText) findViewById(R.id.editText_targetWeight);
@@ -34,16 +37,47 @@ public class AddUser extends AppCompatActivity {
                         String startWeight= editText_startWeight.getText().toString();
                         String targetWeight= editText_targetWeight.getText().toString();
 
+                        RequestPackage p = new RequestPackage();
+                        p.setMethod("PATCH");
+                        p.setUri("https://fiery-torch-8721.firebaseio.com/" + userName + ".json");
+
+
+                        p.setParam("startWeight", startWeight);
+                        p.setParam("targetWeight", targetWeight);
+
+                        HttpClientTask task = new HttpClientTask();
+                        task.execute(p);
+
+
                         Intent intent=new Intent();
                         intent.putExtra("userName",userName);
-                        intent.putExtra("startWeight",startWeight);
-                        intent.putExtra("targetWeight",targetWeight);
 
                         setResult(requestCode_returnUserName,intent);
 
                         finish();
+
+
+
                     }
                 }
         );
+    }
+
+
+    private class HttpClientTask extends AsyncTask<RequestPackage, String, String> {
+
+        @Override
+        protected String doInBackground(RequestPackage... params) {
+            String content =  HttpManager.getData(params[0]);
+            return content;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+        }
+
+
     }
 }

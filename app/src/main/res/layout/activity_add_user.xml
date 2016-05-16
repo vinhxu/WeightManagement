@@ -120,4 +120,5 @@
         android:layout_alignBottom="@+id/textView_height"
         android:layout_alignStart="@+id/editText_targetDays"
         android:layout_alignEnd="@+id/editText_targetDays" />
+
 </RelativeLayout>
