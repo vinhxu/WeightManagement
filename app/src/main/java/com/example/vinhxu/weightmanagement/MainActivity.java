@@ -1,6 +1,7 @@
 package com.example.vinhxu.weightmanagement;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +31,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Add onClick methods
         onClick_addUserButton();
         onClick_listView();
+        loadUsers();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //loadUsers();
 
     }
 
@@ -84,6 +99,48 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void loadUsers() {
+        //Create RequestPackage object
+        RequestPackage p = new RequestPackage();
+        p.setMethod("GET");
+        p.setUri("https://fiery-torch-8721.firebaseio.com/.json");
 
+        //Create HttpClientTask object
+        HttpClientTask task = new HttpClientTask();
+        task.execute(p);
+
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameList);
+
+        ListView listView = (ListView) findViewById(R.id.listView_userName);
+        listView.setAdapter(adapter);
+
+    }
+
+    private class HttpClientTask extends AsyncTask<RequestPackage, String, String> {
+
+        @Override
+        protected String doInBackground(RequestPackage... params) {
+            String content = HttpManager.getData(params[0]);
+
+            return content;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                JSONObject obj = new JSONObject(s);
+                JSONArray ar = obj.names();
+
+                for (int i = 0; i < ar.length(); i++) {
+                    userNameList.add(ar.getString(i));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
 
 }
