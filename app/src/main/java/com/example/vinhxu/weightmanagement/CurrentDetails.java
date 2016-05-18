@@ -16,8 +16,6 @@ public class CurrentDetails extends AppCompatActivity {
         setContentView(R.layout.activity_current_details);
 
         TextView currentDetails_user = (TextView) findViewById(R.id.textView_user);
-        TextView currentDetails_startWeight = (TextView) findViewById(R.id.textView_startWeight);
-        TextView currentDetails_targetWeight = (TextView) findViewById(R.id.textView_targetWeight);
 
         Bundle receivedData = getIntent().getExtras();
 
@@ -53,7 +51,6 @@ public class CurrentDetails extends AppCompatActivity {
 
                 currentDetails_startWeight.setText(obj.getString("startWeight"));
                 currentDetails_targetWeight.setText(obj.getString("targetWeight"));
-                JSONObject info = new JSONObject(obj.getString("vinh"));
 
             } catch (JSONException e) {
                 e.printStackTrace();

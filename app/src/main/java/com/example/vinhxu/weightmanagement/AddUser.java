@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Calendar;
+
 public class AddUser extends AppCompatActivity {
 
     private static Button button_addUserDone;
@@ -36,12 +38,14 @@ public class AddUser extends AppCompatActivity {
                         String userName= editText_userName.getText().toString();
                         String startWeight= editText_startWeight.getText().toString();
                         String targetWeight= editText_targetWeight.getText().toString();
+                        Calendar rightNow = Calendar.getInstance();
+
 
                         RequestPackage p = new RequestPackage();
                         p.setMethod("PATCH");
                         p.setUri("https://fiery-torch-8721.firebaseio.com/" + userName + ".json");
 
-
+                        p.setParam("timeStamp", rightNow.getTime().toString());
                         p.setParam("startWeight", startWeight);
                         p.setParam("targetWeight", targetWeight);
 

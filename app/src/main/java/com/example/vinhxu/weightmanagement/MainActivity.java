@@ -39,12 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //loadUsers();
-
-    }
 
     public void onClick_addUserButton() {
         addUserButton = (Button)findViewById(R.id.button);
@@ -132,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray ar = obj.names();
 
                 for (int i = 0; i < ar.length(); i++) {
-                    userNameList.add(ar.getString(i));
+                    if (!userNameList.contains(ar.getString(i))) {
+                        userNameList.add(ar.getString(i));
+                    }
                 }
 
             } catch (JSONException e) {
