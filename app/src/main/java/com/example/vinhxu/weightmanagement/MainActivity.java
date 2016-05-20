@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if(requestCode==requestCode_returnUserName)
         {
-            //Get all users data from addUser activity
+           /*           //Get all users data from addUser activity
             String userName=data.getStringExtra("userName");
 
             //Add users data to lists
@@ -71,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
             ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameList);
 
-            ListView listView = (ListView) findViewById(R.id.listView_userName);
-            listView.setAdapter(adapter);
+            ListView listView_userName = (ListView) findViewById(R.id.listView_userName);
+            listView_userName.setAdapter(adapter);
+        */  loadUsers();
         }
     }
 
@@ -105,9 +110,35 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNameList);
 
-        ListView listView = (ListView) findViewById(R.id.listView_userName);
-        listView.setAdapter(adapter);
+        ListView listView_userName = (ListView) findViewById(R.id.listView_userName);
+        listView_userName.setAdapter(adapter);
+        registerForContextMenu(listView_userName);
+    }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId()==R.id.listView_userName) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            menu.setHeaderTitle(userNameList.get(info.position));
+            String[] menuItems = getResources().getStringArray(R.array.menu);
+            for (int i = 0; i<menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        int menuItemIndex = item.getItemId();
+        String[] menuItems = getResources().getStringArray(R.array.menu);
+        String menuItemName = menuItems[menuItemIndex];
+        String userName = userNameList.get(info.position);
+
+        TextView text = (TextView)findViewById(R.id.footer);
+        text.setText(String.format("Selected %s for item %s", menuItemName, userName));
+        return true;
     }
 
     private class HttpClientTask extends AsyncTask<RequestPackage, String, String> {
